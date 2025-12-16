@@ -15,16 +15,13 @@ export const verifyMail = async (token, email) => {
     const htmlToSend = template({token:encodeURIComponent(token)})
   try {
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "gmail",
       port: 587,
       secure: false,
       auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
       },
-       connectionTimeout: 10000,
-      greetingTimeout: 10000,
-      socketTimeout: 10000,
     });
 
     const mailOptions = {
