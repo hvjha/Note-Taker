@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API = "http://localhost:8000/notes";
+// const API = "http://localhost:8000/notes";
+const API = "https://note-taker-backend-0otv.onrender.com/notes";
 
 
 export const getAuthHeader = () => {

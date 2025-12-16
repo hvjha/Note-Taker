@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API = "http://localhost:8000/user";
+// const API = "http://localhost:8000/user";
+const API = "https://note-taker-backend-0otv.onrender.com/user";
 
 export const loginUser = (data) =>
   axios.post(`${API}/login`, data, {
