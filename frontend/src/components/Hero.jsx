@@ -3,7 +3,7 @@ import React from "react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
-import { getData } from "@/context/userContext";
+import { getData } from "@/context/UserContext";
 
 const Hero = () => {
   const { user } = getData();
