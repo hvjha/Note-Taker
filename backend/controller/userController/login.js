@@ -26,12 +26,12 @@ export const loginuser = async(req,res)=>{
                 message:"Incorrect Password"
             })
         }
-        if(user.isVerified ===false){
-            return res.status(403).json({
-                success:false,
-                message:"Verify your account than login"
-            })
-        }
+        // if(user.isVerified ===false){
+        //     return res.status(403).json({
+        //         success:false,
+        //         message:"Verify your account than login"
+        //     })
+        // }
         // check for existing session and delete it
         const existingSession = await Session.findOne({userId:user._id})
         if(existingSession){
