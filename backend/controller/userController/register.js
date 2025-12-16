@@ -1,0 +1,45 @@
+import User from "../../models/userModel.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { verifyMail } from "../../emailVerify/verifyMail.js";
+export const registerUser = async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    // console.log(req.body);
+    if (!username || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "User already Registered ! please login",
+      });
+    }
+    const hashPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({
+      username,
+      email,
+      password: hashPassword,
+    });
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "10m",
+    });
+    verifyMail(token, email);
+    newUser.token = token;
+    await newUser.save();
+    return res.status(201).json({
+      success: true,
+      message: "User Registered successfully",
+      data: newUser,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
