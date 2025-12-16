@@ -15,7 +15,7 @@ export const verifyMail = async (token, email) => {
     const htmlToSend = template({token:encodeURIComponent(token)})
   try {
     const transporter = nodemailer.createTransport({
-      host: "gmail",
+      host: "smtp.gmail.com",
       port: 587,
       secure: false,
       auth: {

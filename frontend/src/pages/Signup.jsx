@@ -38,7 +38,7 @@ const Signup = () => {
     setIsLoading(true);
     const res = await signupUser(formData);
     toast.success(res.data.message);
-    navigate("/verify");
+    navigate("/login");
   } catch (err) {
     toast.error(err.response?.data?.message);
   } finally {
